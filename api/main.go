@@ -6,6 +6,7 @@ import (
 	"glartek/api/types"
 	"net/http"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -47,6 +48,7 @@ func getWeather(context *gin.Context) {
 func main() {
 	gin.SetMode(gin.DebugMode)
 	router := gin.Default()
+	router.Use(cors.Default())
 	router.GET("/weather", getWeather)
 	router.Run("localhost:8080")
 	println("Server is running on port :8080")
