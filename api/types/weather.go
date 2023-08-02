@@ -1,6 +1,7 @@
 package types
 
 type Weather struct {
+	ID   int    `json:"id"`
 	Name string `json:"name"`
 
 	Weather []struct {
