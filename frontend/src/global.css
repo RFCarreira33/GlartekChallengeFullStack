@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+}
+
 html {
   font-family: system-ui, sans-serif;
   font-size: 18px;
