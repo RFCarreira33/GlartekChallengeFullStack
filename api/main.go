@@ -19,7 +19,7 @@ func main() {
 	router.GET("/weather", func(context *gin.Context) {
 		handlers.GetWeather(context, cache_store)
 	})
-	router.GET("/forecast/:city", func(context *gin.Context) {
+	router.GET("/weather/:city", func(context *gin.Context) {
 		city := context.Param("city")
 		handlers.GetForecast(context, cache_store, city)
 	})

@@ -1,28 +1,20 @@
 export const getBackground = (icon: string) => {
+  const hour = new Date().getHours();
+  const time = hour >= 6 && hour <= 18 ? "d" : "n";
+
   switch (icon) {
-    case "01d":
-      return "clear-d.jpg";
-    case "01n":
-      return "clear-n.jpg";
-    case "02d":
-    case "03d":
-    case "04d":
-      return "cloudy-d.jpg";
-    case "02n":
-    case "03n":
-    case "04n":
-      return "cloudy-n.jpg";
-    case "09d":
-    case "10d":
-      return "rainy-d.jpg";
-    case "09n":
-    case "10n":
-      return "rainy-n.png";
-    case "11d":
-    case "11n":
+    case "01":
+      return `clear-${time}.jpg`;
+    case "02":
+    case "03":
+    case "04":
+      return `cloudy-${time}.jpg`;
+    case "09":
+    case "10":
+      return `rainy-${time}.jpg`;
+    case "11":
       return "thunderstorm.jpg";
-    case "13d":
-    case "13n":
+    case "13":
       return "snow.jpg";
     default:
       return "clear-d.jpg";
@@ -60,8 +52,7 @@ export const getWindDirection = (deg: number) => {
 export function getWeekdays() {
   const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-  const today = new Date();
-  const todayIndex = today.getDay();
+  const todayIndex = new Date().getDay();
 
   const weekdaysList = [];
   for (let i = 0; i < 7; i++) {
@@ -70,4 +61,8 @@ export function getWeekdays() {
   }
 
   return weekdaysList;
+}
+
+export function getCapitalized(str: string) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
 }

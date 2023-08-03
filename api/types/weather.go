@@ -11,10 +11,8 @@ type Weather struct {
 	} `json:"weather"`
 
 	Main struct {
-		Temp     float64 `json:"temp"`
-		TempMin  float64 `json:"temp_min"`
-		TempMax  float64 `json:"temp_max"`
-		Humidity int     `json:"humidity"`
+		Temp  float64 `json:"temp"`
+		Feels float64 `json:"feels_like"`
 	} `json:"main"`
 
 	Wind struct {

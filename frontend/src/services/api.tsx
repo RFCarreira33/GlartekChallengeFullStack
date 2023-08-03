@@ -8,9 +8,9 @@ export async function fetchWeather() {
 }
 
 export async function fetchForecast(city: string) {
-  const response = await fetch(`http://localhost:8080/forecast/${city}`);
+  const response = await fetch(`http://localhost:8080/weather/${city}`);
   if (response.status != 200) {
-    throw new Error("Failed to fetch 7 day forecast");
+    throw new Error("Failed to fetch 10 day forecast");
   }
 
   return response;

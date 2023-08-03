@@ -1,28 +1,39 @@
 import { Link } from "react-router-dom";
-import { getBackground } from "../services/helpers";
+import {
+  getBackground,
+  getCapitalized,
+  getWindDirection,
+} from "../services/helpers";
 
 interface CardProps {
   city_id: number;
   city: string;
-  weather: string;
+  feels: number;
   description: string;
   icon: string;
   temperature: number;
+  humidity: number;
+  wind_speed: number;
+  wind_deg: number;
 }
 
 const Card: React.FC<CardProps> = ({
   city,
-  weather,
+  feels,
   description,
   icon,
   temperature,
+  wind_speed,
+  wind_deg,
   city_id,
 }) => {
   return (
     <div
       className="block max-w-sm rounded-lg bg-white bg-cover p-6 shadow-lg dark:bg-neutral-700 relative link-card hover:scale-105 ease-out transition-transform"
       style={{
-        backgroundImage: `url("src/assets/images/${getBackground(icon)}")`,
+        backgroundImage: `url("src/assets/images/${getBackground(
+          icon.slice(0, -1)
+        )}")`,
       }}
     >
       <Link to={`/${city_id}`}>
@@ -30,9 +41,9 @@ const Card: React.FC<CardProps> = ({
         <h5 className="mb-2 text-xl font-medium text-white relative z-10">
           {city}
         </h5>
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center pr-2">
           <img
-            className="weather-badge w-12 h-12 mr-1 z-10"
+            className="weather-badge w-12 h-12 z-10 brightness-120"
             src={`https://openweathermap.org/img/wn/${icon}@2x.png`}
             alt="weather icon"
           />
@@ -40,12 +51,17 @@ const Card: React.FC<CardProps> = ({
             {temperature.toFixed(0)} °C
           </p>
         </div>
-        <p className="mb-1 font-medium text-white relative z-10 drop-shadow-xl">
-          {weather}
+        <p className="text-white relative z-10 drop-shadow-xl">
+          Feels like {feels.toFixed(0)} °C
         </p>
         <p className="mb-4 text-white relative z-10 drop-shadow-xl">
-          {description}
+          {getCapitalized(description)}
         </p>
+        <div className="flex items-center justify-center ">
+          <p className="font-medium z-10">
+            Wind: {wind_speed.toFixed()} km/h {getWindDirection(wind_deg)}
+          </p>
+        </div>
       </Link>
     </div>
   );

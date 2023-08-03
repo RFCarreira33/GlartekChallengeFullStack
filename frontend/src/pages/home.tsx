@@ -1,5 +1,5 @@
 import { useLoaderData } from "react-router-dom";
-import Card from "../components/card";
+import Card from "../components/Card";
 
 const Home = () => {
   const data: any = useLoaderData();
@@ -15,10 +15,13 @@ const Home = () => {
             key={item.id}
             city_id={item.id}
             city={item.name}
-            weather={item.weather[0].main}
+            feels={item.main.feels_like}
             description={item.weather[0].description}
             icon={item.weather[0].icon}
             temperature={item.main.temp}
+            humidity={item.main.humidity}
+            wind_speed={item.wind.speed * 3.6}
+            wind_deg={item.wind.deg}
           />
         ))}
       </section>
