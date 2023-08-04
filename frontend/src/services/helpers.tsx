@@ -1,3 +1,10 @@
+import { TOKEN_KEY } from "./constants";
+
+/**
+ * Helper function to get the background image based on the weather icon
+ * @param icon
+ * @returns image name as string
+ */
 export const getBackground = (icon: string) => {
   const hour = new Date().getHours();
   const time = hour >= 6 && hour <= 18 ? "d" : "n";
@@ -21,6 +28,11 @@ export const getBackground = (icon: string) => {
   }
 };
 
+/**
+ * Helper function to get the wind direction based on the wind degree
+ * @param deg
+ * @returns wind direction as string
+ */
 export const getWindDirection = (deg: number) => {
   let counter = 0;
   while (deg > 45) {
@@ -49,6 +61,10 @@ export const getWindDirection = (deg: number) => {
   }
 };
 
+/**
+ * Helper function to get the list of weekdays starting from today
+ * @returns list of weekdays as string
+ */
 export function getWeekdays() {
   const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -63,6 +79,24 @@ export function getWeekdays() {
   return weekdaysList;
 }
 
+/**
+ * Helper function to capitalize the first letter of a string
+ * @param str
+ * @returns capitalized string
+ */
 export function getCapitalized(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+export function getToken() {
+  return localStorage.getItem(TOKEN_KEY);
+}
+
+export function deleteToken() {
+  localStorage.removeItem(TOKEN_KEY);
+}
+
+// Very redundant function, but keeps code clean
+export function isLoggedIn() {
+  return getToken() != null;
 }

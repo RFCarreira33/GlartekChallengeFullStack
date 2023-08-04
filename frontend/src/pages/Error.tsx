@@ -1,14 +1,15 @@
-import React from "react";
+import { Link, useRouteError } from "react-router-dom";
 
-interface ErrorPageProps {
-  error?: Error;
-}
-
-const ErrorPage: React.FC<ErrorPageProps> = ({ error }) => {
+const ErrorPage = () => {
+  const error: any = useRouteError();
   return (
     <div>
       <h2>Oops! Something went wrong.</h2>
-      <p>{error && error.toString()}</p>
+      <p>{error.message}</p>
+      <br />
+      <Link to="/" className="text-blue-200">
+        Back to home page
+      </Link>
     </div>
   );
 };

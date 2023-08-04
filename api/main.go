@@ -10,10 +10,14 @@ import (
 )
 
 func main() {
-	gin.SetMode(gin.DebugMode)
+	// Setup router and cache
 	router := gin.Default()
 	cache_store := cache.New(30*time.Minute, 35*time.Minute)
-	router.Use(cors.Default())
+	// Allow CORS and Authorization header for react app
+	router.Use(cors.New(cors.Config{
+		AllowOrigins: []string{"*"},
+		AllowHeaders: []string{"Authorization"},
+	}))
 
 	// endpoints
 	router.GET("/weather", func(context *gin.Context) {
@@ -22,6 +26,10 @@ func main() {
 	router.GET("/weather/:city", func(context *gin.Context) {
 		city := context.Param("city")
 		handlers.GetForecast(context, cache_store, city)
+	})
+
+	router.POST("/login", func(context *gin.Context) {
+		handlers.Login(context)
 	})
 	// end endpoints
 
