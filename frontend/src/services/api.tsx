@@ -5,7 +5,7 @@ import { getToken } from "./helpers";
 export async function fetchWeather() {
   const response = await fetch(`${BACKEND_URL}/weather`);
   if (response.status != 200) {
-    throw new Error("Failed to fetch weather");
+    throw new Error("Failed to fetch weather data");
   }
 
   return response;
@@ -18,10 +18,19 @@ export async function fetchForecast(city: string) {
       Authorization: `Bearer ${getToken()}`,
     },
   });
-  if (response.status != 200) {
-    throw new Error("Failed to fetch 10 day forecast");
-  }
 
+  const status = response.status;
+  if (status != 200) {
+    switch (status) {
+      case 401:
+        localStorage.removeItem(TOKEN_KEY);
+        return redirect("/login");
+      case 400:
+        throw new Error("Invalid city");
+      default:
+        throw new Error("Failed to fetch forecast data");
+    }
+  }
   return response;
 }
 

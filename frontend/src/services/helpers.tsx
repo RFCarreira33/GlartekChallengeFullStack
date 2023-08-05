@@ -92,10 +92,6 @@ export function getToken() {
   return localStorage.getItem(TOKEN_KEY);
 }
 
-export function deleteToken() {
-  localStorage.removeItem(TOKEN_KEY);
-}
-
 // Very redundant function, but keeps code clean
 export function isLoggedIn() {
   return getToken() != null;

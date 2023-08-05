@@ -5,7 +5,7 @@ const ErrorPage = () => {
   return (
     <div>
       <h2>Oops! Something went wrong.</h2>
-      <p>{error.message}</p>
+      <p>{error.message ? error.message : "Page not found"}</p>
       <br />
       <Link to="/" className="text-blue-200">
         Back to home page

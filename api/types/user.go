@@ -20,6 +20,7 @@ type JwtClaims struct {
 func (u User) CheckCrendentials() bool {
 	var usersDb = map[string]string{
 		"glartek": "password123",
+		"test":    "test",
 	}
 	expectedPassword, ok := usersDb[u.Username]
 	if !ok || expectedPassword != u.Password {

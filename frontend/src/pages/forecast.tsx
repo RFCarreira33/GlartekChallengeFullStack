@@ -38,7 +38,7 @@ const Forecast = () => {
       <div
         className="block rounded-lg bg-white bg-cover p-6 shadow-lg dark:bg-neutral-700"
         style={{
-          backgroundImage: `url("src/assets/images/${getBackground(
+          backgroundImage: `url("/src/assets/images/${getBackground(
             todaysData.icon.slice(0, -1)
           )}")`,
         }}

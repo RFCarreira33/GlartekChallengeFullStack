@@ -83,13 +83,11 @@ func GetForecast(context *gin.Context, cache_store *cache.Cache, city_id string)
 	// Check for authentication
 	tokenString := context.Request.Header.Get("Authorization")
 	if tokenString == "" {
-		println("Missing")
 		context.IndentedJSON(http.StatusUnauthorized, gin.H{"error": "Missing authorization token"})
 		return
 	}
 	tokenString = strings.Replace(tokenString, "Bearer ", "", 1)
 	if !helpers.IsTokenValid(tokenString) {
-		println("Error on decoding credential")
 		context.IndentedJSON(http.StatusUnauthorized, gin.H{"error": "Invalid authorization token"})
 		return
 	}
@@ -109,7 +107,7 @@ func GetForecast(context *gin.Context, cache_store *cache.Cache, city_id string)
 		}
 	}
 	if city == "" {
-		context.IndentedJSON(http.StatusBadRequest, gin.H{"error": "Invalid city id"})
+		context.IndentedJSON(http.StatusBadRequest, gin.H{"error": "Invalid City"})
 		return
 	}
 

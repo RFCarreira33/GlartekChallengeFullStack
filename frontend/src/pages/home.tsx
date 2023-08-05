@@ -1,15 +1,16 @@
 import { Link, useLoaderData } from "react-router-dom";
-import Card from "../components/Card";
-import { getToken } from "../services/helpers";
+import WeatherCard from "../components/WeatherCard";
+import { isLoggedIn } from "../services/helpers";
 
 const Home = () => {
   const data: any = useLoaderData();
+  const loggedIn = isLoggedIn();
 
   return (
     <>
       <section className="grid grid-cols-2 gap-4 auto-cols-max sm:grid-cols-2 sm:gap-3">
-        <h1 className="text-center">Weather App</h1>
-        {getToken() == null ? (
+        <h1 className="text-left">Weather App</h1>
+        {!loggedIn ? (
           <Link to="/login" className="text-right text-blue-200">
             Login
           </Link>
@@ -18,12 +19,13 @@ const Home = () => {
             Logout
           </Link>
         )}
-        <h2 className="text-center">Glartek FullStack Challenge</h2>
+        <h2 className="text-left">Glartek FullStack Challenge</h2>
+        {loggedIn && <h2 className="text-right">Welcome</h2>}
       </section>
       <br />
       <section className="grid grid-cols-2 gap-4 auto-cols-max sm:grid-cols-2 sm:gap-3">
         {data.map((item: any) => (
-          <Card
+          <WeatherCard
             key={item.id}
             city_id={item.id}
             city={item.name}

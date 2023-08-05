@@ -17,7 +17,7 @@ interface CardProps {
   wind_deg: number;
 }
 
-const Card: React.FC<CardProps> = ({
+const WeatherCard: React.FC<CardProps> = ({
   city,
   feels,
   description,
@@ -36,7 +36,7 @@ const Card: React.FC<CardProps> = ({
         )}")`,
       }}
     >
-      <Link to={`/${city_id}`}>
+      <Link to={`/forecast/${city_id}`}>
         <div className="absolute inset-0 bg-black opacity-30 brightness-80 rounded-lg"></div>
         <h5 className="mb-2 text-xl font-medium text-white relative z-10">
           {city}
@@ -67,4 +67,4 @@ const Card: React.FC<CardProps> = ({
   );
 };
 
-export default Card;
+export default WeatherCard;

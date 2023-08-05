@@ -13,10 +13,10 @@ func main() {
 	// Setup router and cache
 	router := gin.Default()
 	cache_store := cache.New(30*time.Minute, 35*time.Minute)
-	// Allow CORS and Authorization header for react app
+	// Allow CORS and headers used by the react app
 	router.Use(cors.New(cors.Config{
 		AllowOrigins: []string{"*"},
-		AllowHeaders: []string{"Authorization"},
+		AllowHeaders: []string{"Authorization", "Content-Type", "Origin"},
 	}))
 
 	// endpoints

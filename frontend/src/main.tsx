@@ -21,7 +21,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/:city",
+    path: "/forecast/:city",
     element: <Forecast />,
     loader: ({ params }) =>
       isLoggedIn() ? fetchForecast(params.city!) : redirect("/login"),
