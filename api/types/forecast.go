@@ -6,6 +6,7 @@ type Forecast struct {
 	} `json:"city"`
 
 	List []struct {
+		Dt   int `json:"dt"`
 		Main struct {
 			Temp    float64 `json:"temp"`
 			TempMin float64 `json:"temp_min"`

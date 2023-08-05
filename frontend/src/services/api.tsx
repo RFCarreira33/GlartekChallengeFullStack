@@ -1,9 +1,8 @@
 import { redirect } from "react-router-dom";
-import { BACKEND_URL, TOKEN_KEY } from "./constants";
 import { getToken } from "./helpers";
 
 export async function fetchWeather() {
-  const response = await fetch(`${BACKEND_URL}/weather`);
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/weather`);
   if (response.status != 200) {
     throw new Error("Failed to fetch weather data");
   }
@@ -12,18 +11,21 @@ export async function fetchWeather() {
 }
 
 export async function fetchForecast(city: string) {
-  const response = await fetch(`${BACKEND_URL}/weather/${city}`, {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${getToken()}`,
-    },
-  });
+  const response = await fetch(
+    `${import.meta.env.VITE_BACKEND_URL}/weather/${city}`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+    }
+  );
 
   const status = response.status;
   if (status != 200) {
     switch (status) {
       case 401:
-        localStorage.removeItem(TOKEN_KEY);
+        localStorage.removeItem(import.meta.env.VITE_TOKEN_KEY);
         return redirect("/login");
       case 400:
         throw new Error("Invalid city");
@@ -37,7 +39,7 @@ export async function fetchForecast(city: string) {
 export async function login(request: Request) {
   const data = await request.formData();
 
-  const response = await fetch(`${BACKEND_URL}/login`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -53,11 +55,11 @@ export async function login(request: Request) {
     return { error: responseData.error };
   }
 
-  localStorage.setItem(TOKEN_KEY, responseData.token);
+  localStorage.setItem(import.meta.env.VITE_TOKEN_KEY, responseData.token);
   return redirect("/");
 }
 
 export function logout() {
-  localStorage.removeItem(TOKEN_KEY);
+  localStorage.removeItem(import.meta.env.VITE_TOKEN_KEY);
   return redirect("/");
 }

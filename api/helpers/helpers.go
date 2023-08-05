@@ -2,9 +2,9 @@ package helpers
 
 import (
 	"encoding/json"
-	"glartek/api/config"
 	"glartek/api/types"
 	"net/http"
+	"os"
 
 	"github.com/golang-jwt/jwt"
 )
@@ -31,7 +31,7 @@ func MakeRequest(url string, target interface{}) error {
 **/
 func IsTokenValid(tokenString string) bool {
 	token, err := jwt.ParseWithClaims(tokenString, &types.JwtClaims{}, func(token *jwt.Token) (interface{}, error) {
-		return []byte(config.SECRET_KEY), nil
+		return []byte(os.Getenv("SECRET_KEY")), nil
 	})
 	if err != nil {
 		return false

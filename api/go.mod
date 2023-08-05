@@ -4,6 +4,8 @@ go 1.20
 
 require github.com/gin-contrib/cache v1.2.0
 
+require github.com/joho/godotenv v1.5.1 // indirect
+
 require (
 	github.com/bradfitz/gomemcache v0.0.0-20220106215444-fb4bf637b56d // indirect
 	github.com/bytedance/sonic v1.9.1 // indirect

@@ -30,6 +30,7 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+    loader: () => isLoggedIn() && redirect("/"),
     action: ({ request }) => login(request),
     errorElement: <ErrorPage />,
   },

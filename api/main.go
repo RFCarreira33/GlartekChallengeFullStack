@@ -2,14 +2,20 @@ package main
 
 import (
 	"glartek/api/handlers"
+	"os"
 	"time"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 	"github.com/robfig/go-cache"
 )
 
 func main() {
+	err := godotenv.Load(".env")
+	if err != nil {
+		panic(err)
+	}
 	// Setup router and cache
 	router := gin.Default()
 	cache_store := cache.New(30*time.Minute, 35*time.Minute)
@@ -32,7 +38,7 @@ func main() {
 		handlers.Login(context)
 	})
 	// end endpoints
-
-	router.Run("localhost:8080")
-	println("Server is running on port 8080")
+	host := os.Getenv("HOST") + ":" + os.Getenv("PORT")
+	router.Run(host)
+	println("Server is running on host " + host)
 }

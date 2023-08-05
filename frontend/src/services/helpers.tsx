@@ -1,5 +1,3 @@
-import { TOKEN_KEY } from "./constants";
-
 /**
  * Helper function to get the background image based on the weather icon
  * @param icon
@@ -62,24 +60,6 @@ export const getWindDirection = (deg: number) => {
 };
 
 /**
- * Helper function to get the list of weekdays starting from today
- * @returns list of weekdays as string
- */
-export function getWeekdays() {
-  const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
-  const todayIndex = new Date().getDay();
-
-  const weekdaysList = [];
-  for (let i = 0; i < 7; i++) {
-    const nextDayIndex = (todayIndex + i) % 7;
-    weekdaysList.push(weekdays[nextDayIndex]);
-  }
-
-  return weekdaysList;
-}
-
-/**
  * Helper function to capitalize the first letter of a string
  * @param str
  * @returns capitalized string
@@ -89,7 +69,7 @@ export function getCapitalized(str: string) {
 }
 
 export function getToken() {
-  return localStorage.getItem(TOKEN_KEY);
+  return localStorage.getItem(import.meta.env.VITE_TOKEN_KEY);
 }
 
 // Very redundant function, but keeps code clean
