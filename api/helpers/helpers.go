@@ -2,6 +2,7 @@ package helpers
 
 import (
 	"encoding/json"
+	"glartek/api/config"
 	"glartek/api/types"
 	"net/http"
 	"os"
@@ -31,7 +32,7 @@ func MakeRequest(url string, target interface{}) error {
 **/
 func IsTokenValid(tokenString string) bool {
 	token, err := jwt.ParseWithClaims(tokenString, &types.JwtClaims{}, func(token *jwt.Token) (interface{}, error) {
-		return []byte(os.Getenv("SECRET_KEY")), nil
+		return []byte(os.Getenv(config.SECRET_KEY)), nil
 	})
 	if err != nil {
 		return false

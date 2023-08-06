@@ -40,10 +40,3 @@ h2 {
 header {
   margin: 0em 0 2em;
 }
-
-@media (max-width: 767px) {
-  .field-wind {
-    display: none;
-  }
-}
-  

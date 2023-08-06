@@ -81,8 +81,7 @@ const Forecast = () => {
             key={index}
             time={new Date(day.dt * 1000).getHours()}
             weather={day.weather[0].main}
-            temp_max={day.main.temp_max.toFixed(0)}
-            temp_min={day.main.temp_min.toFixed(0)}
+            temp={day.main.temp.toFixed(0)}
             wind_speed={day.wind.speed * 3.6}
             wind_deg={day.wind.deg}
           />

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"glartek/api/config"
 	"glartek/api/handlers"
 	"os"
 	"time"
@@ -38,7 +39,8 @@ func main() {
 		handlers.Login(context)
 	})
 	// end endpoints
-	host := os.Getenv("HOST") + ":" + os.Getenv("PORT")
+
+	host := os.Getenv(config.HOST) + ":" + os.Getenv(config.PORT)
 	router.Run(host)
 	println("Server is running on host " + host)
 }

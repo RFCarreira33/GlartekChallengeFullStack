@@ -36,7 +36,7 @@ func Login(context *gin.Context) {
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	signedToken, err := token.SignedString([]byte(os.Getenv("SECRET_KEY")))
+	signedToken, err := token.SignedString([]byte(os.Getenv(config.SECRET_KEY)))
 
 	if err != nil {
 		context.IndentedJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
@@ -62,7 +62,7 @@ func GetWeather(context *gin.Context, cache_store *cache.Cache) {
 	var weathers []types.Weather = make([]types.Weather, len(config.CITY_IDS))
 	for index, city := range config.CITY_IDS {
 		var weather types.Weather
-		url := config.API_URL_WEATHER + os.Getenv("API_KEY") + "&id=" + city
+		url := config.API_URL_WEATHER + os.Getenv(config.API_KEY) + "&id=" + city
 		err := helpers.MakeRequest(url, &weather)
 		if err != nil {
 			context.IndentedJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
@@ -114,7 +114,7 @@ func GetForecast(context *gin.Context, cache_store *cache.Cache, city_id string)
 
 	// Get forecast from API and cache it
 	var forecast types.Forecast
-	url := config.API_URL_FORECAST + os.Getenv("API_KEY") + "&id=" + city_id
+	url := config.API_URL_FORECAST + os.Getenv(config.API_KEY) + "&id=" + city_id
 	err := helpers.MakeRequest(url, &forecast)
 	if err != nil {
 		context.IndentedJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})

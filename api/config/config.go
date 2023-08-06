@@ -17,3 +17,9 @@ var CITY_IDS = [5]string{
 // Cache keys
 const WEATHER_CACHE_KEY = "weathers"
 const FORECAST_CACHE_KEY = "forecast_"
+
+// Environment variables keys
+const SECRET_KEY = "SECRET_KEY"
+const API_KEY = "API_KEY"
+const HOST = "HOST"
+const PORT = "PORT"
