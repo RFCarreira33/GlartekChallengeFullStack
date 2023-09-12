@@ -14,7 +14,7 @@ This project consists of a backend developed in [Golang](https://go.dev/) provid
 
 This project uses `.env` files but for the sake of convenience I've included them in the repository. Just rename them from `.env.example` to `.env` and you're good to go.
 
-**Note**: If you decide to change the `.env` files make sure both hosts and ports match.
+**Note**: Since it's a free API, you'll find an API key provided in the `.env.example` file, but you have the flexibility to modify it as needed. If you opt to make changes to the `.env` files, make sure both hosts and ports match.
 
 ```bash
 git clone https://github.com/RFCarreira33/GlartekChallengeFullStack
